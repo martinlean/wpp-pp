@@ -4,14 +4,18 @@ import cors from 'cors';
 import cheerio from 'cheerio';
 import fs from 'fs';
 import https from 'https';
-import dotenv from 'dotenv'
+import dotenv from 'dotenv';
 
-dotenv.config()
+dotenv.config();
 
 const app = express();
 const port = process.env.PORT || 443;
 
-app.use(cors());
+app.use(cors({
+    origin: '*',
+    methods: ['GET', 'POST'],
+    allowedHeaders: ['Content-Type']
+}));
 
 app.get('/profile-image', async (req, res) => {
     const { phone } = req.query;
