@@ -4,9 +4,12 @@ import cors from 'cors';
 import cheerio from 'cheerio';
 import fs from 'fs';
 import https from 'https';
+import dotenv from 'dotenv'
+
+dotenv.config()
 
 const app = express();
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 443;
 
 app.use(cors());
 
@@ -26,7 +29,7 @@ app.get('/profile-image', async (req, res) => {
 
         if (imageElement.length > 0) {
             const imageUrl = imageElement.attr('src');
-            return res.json({ imageUrl });
+            return res.status(200).json({ imageUrl });
         } else {
             return res.status(404).json({ error: 'Profile image not found' });
         }
